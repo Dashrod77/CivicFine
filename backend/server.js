@@ -1,9 +1,11 @@
-require("dotenv").config();
 const express = require("express");
 const path = require("path");
 
 const app = express();
-app.use(express.static(path.join(__dirname, "../public")));
+const frontend = path.join(__dirname, "../Frontend");
+
+app.use(express.static(frontend));
+app.get("/", (req, res) => res.sendFile(path.join(frontend, "Main_user.html")));
 app.get("/health", (req, res) => res.json({ ok: true }));
 
 const port = process.env.PORT || 3000;
